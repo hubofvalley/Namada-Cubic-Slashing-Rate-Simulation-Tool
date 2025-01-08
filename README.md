@@ -19,7 +19,16 @@ This tool helps stakers understand Namada's unique Cubic Slashing system, which 
 4. Supporting smaller validators like Grand Valley promotes stability for Namada ([tnam1qyplu8gruqmmvwp7x7kd92m6x4xpyce265fa05r6](https://explorer75.org/namada/validators/tnam1qyplu8gruqmmvwp7x7kd92m6x4xpyce265fa05r6)).
 5. Don’t put all your marbles in one jar – spread them for safety!
 
-Let's Build Namada Together, Let's Shield Together. - Grand Valley
+Let's Buidl Namada Together, Let's Shiedl Together. - Grand Valley
+
+---
+
+## How to Use the Simulation Tool
+1. **Select Validator**: Choose a validator from the dropdown menu.
+2. **Input Epoch**: Enter the epoch in which the infractions occurred.
+3. **Input Infractions**: Enter the number of infractions for the selected epoch.
+4. **Run Simulation**: Click the "Run Simulation" button to calculate the potential CSR and slashed NAM for the selected validator.
+5. **View Results**: The simulation results will be displayed in the table below, showing the CSR percentage and the amount of slashed NAM for each validator.
 
 ---
 

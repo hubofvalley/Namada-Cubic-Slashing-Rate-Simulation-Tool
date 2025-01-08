@@ -176,7 +176,16 @@
 
         <section id="simulationTool">
             <h2>CSR Simulation Tool</h2>
-            <p>Use this tool to simulate CSR based on validator infractions. You can select a validator and input infraction details to calculate the potential CSR for each validator.</p>
+            <p>Use this tool to simulate CSR based on validator infractions. You can select multiple validators and input infraction details to calculate the potential CSR for each validator. The simulation tool is not limited to only one validator; you can input as many validators as you want.</p>
+            <p><strong> How to Use the Simulation Tool:</strong>
+                <ol>
+                    <li><strong>Select Validator</strong>: Choose a validator from the dropdown menu.</li>
+                    <li><strong>Input Epoch</strong>: Enter the epoch in which the infractions occurred.</li>
+                    <li><strong>Input Infractions</strong>: Enter the number of infractions for the selected epoch.</li>
+                    <li><strong>Run Simulation</strong>: Click the "Run Simulation" button to calculate the potential CSR and slashed NAM for the selected validator.</li>
+                    <li><strong>View Results</strong>: The simulation results will be displayed in the table below, showing the CSR percentage and the amount of slashed NAM for each validator.</li>
+                </ol>
+            </p>
             <form>
                 <!-- Input form for simulation (validator selection, infraction input, etc.) -->
                 <label for="validatorSelect">Select Validator:</label>
