@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #ffde59, #ff914d);
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 30px;
+}
+
+.logo {
+    width: 150px;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.description {
+    margin: 30px 0;
+}
+
+.validator-table, .simulation-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #ff914d;
+    color: white;
+}
+
+.btn {
+    background-color: #ff914d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #e77d39;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+#paginationControls {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#paginationControls button {
+    margin: 0 10px;
+}
+
+#selectedVotingPower {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.top-description {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.top-description p {
+    margin: 10px 0;
+}
+
+.links {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.links a {
+    margin: 0 10px;
+    color: #ff914d;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.logo-container img {
+    width: 50px;
+    margin: 0 10px;
+}
+
+#descriptionSection {
+    display: none;
+    text-align: center;
+    margin: 20px 0;
+}
+
+#scrollButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ff914d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#scrollButton:hover {
+    background-color: #e77d39;
+}

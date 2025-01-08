@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cubic Slashing Rate Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ffde59, #ff914d);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            padding: 30px;
+        }
+        .logo-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .logo-header img {
+            width: 150px;
+            margin-right: 10px;
+        }
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .description {
+            margin: 30px 0;
+        }
+        .validator-table, .simulation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #ff914d;
+            color: white;
+        }
+        .btn {
+            background-color: #ff914d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #e77d39;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+        #paginationControls {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #paginationControls button {
+            margin: 0 10px;
+        }
+        #selectedVotingPower {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .top-description {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .top-description p {
+            margin: 10px 0;
+        }
+        .links {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .links a {
+            margin: 0 10px;
+            color: #ff914d;
+            text-decoration: none;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .logo-container img {
+            width: 50px;
+            margin: 0 10px;
+        }
+        #descriptionSection {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        #scrollButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #ff914d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #scrollButton:hover {
+            background-color: #e77d39;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-header">
+            <img src="https://i.ibb.co.com/kgD90np/GRAND-VALLEY-fix.png" alt="Grand Valley Logo">
+            <h1>Cubic Slashing Rate Simulation Tool by Grand Valley</h1>
+        </div>
+    </header>
+    <div class="content">
+        <section class="top-description">
+            <h2>Purpose of This Tool</h2>
+            <p>This tool helps stakers understand Namada's unique Cubic Slashing system, which penalizes validators based on their voting power.</p>
+            <p>It helps you assess risks, rewards, and encourages decentralized staking by spreading your stake across smaller validators.</p>
+            <h2>How Does Namada Slashing Work?</h2>
+            <p>1. Think of slashing as a penalty: the more marbles (stake) a validator controls, the harsher the penalty if they misbehave.</p>
+            <p>2. When misbehavior happens, the validator is frozen – no one can withdraw their marbles until it's resolved.</p>
+            <p>3. The penalty increases if the validator controls more marbles, encouraging fair play.</p>
+            <p>4. The penalty is delayed, giving others time to react and protect their stake.</p>
+            <p>5. Validators can return after proving they’re ready to follow the rules again.</p>
+            <h2>Why Stake with Small Validators?</h2>
+            <p>1. Think of a big jar: if it falls, everyone loses more. Spread your stake across many jars (smaller validators).</p>
+            <p>2. Spreading your marbles across jars protects your investment and strengthens the network.</p>
+            <p>3. Decentralization keeps the network secure and balanced.</p>
+            <p>4. Supporting smaller validators like <a href="https://explorer75.org/namada/validators/tnam1qyplu8gruqmmvwp7x7kd92m6x4xpyce265fa05r6" target="_blank">Grand Valley</a> promotes stability for Namada</p>
+            <p>5. Don’t put all your marbles in one jar – spread them for safety!</p>
+            <p>Scroll down to use the simulation tool or <button id="scrollButton" onclick="scrollToSimulationTool()">click here</button> to go directly to the simulation tool.</p>
+        </section>
+
+        <section>
+            <h2>Validator List</h2>
+            <table class="validator-table">
+                <thead>
+                    <tr>
+                        <th>Validator Name</th>
+                        <th>Voting Power (NAM)</th>
+                        <th>Voting Power Fraction (%)</th>
+                        <th>Independent CSR (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Placeholder for validator data -->
+                </tbody>
+            </table>
+            <div id="paginationControls">
+                <!-- Pagination controls will be inserted here -->
+            </div>
+        </section>
+
+        <section id="simulationTool">
+            <h2>CSR Simulation Tool</h2>
+            <p>Use this tool to simulate CSR based on validator infractions. You can select a validator and input infraction details to calculate the potential CSR for each validator.</p>
+            <form>
+                <!-- Input form for simulation (validator selection, infraction input, etc.) -->
+                <label for="validatorSelect">Select Validator:</label>
+                <select id="validatorSelect" name="validator">
+                    <!-- Placeholder for validators -->
+                </select>
+                <label for="epoch">Epoch:</label>
+                <input type="number" id="epoch" name="epoch">
+                <label for="infractions">Infractions:</label>
+                <input type="number" id="infractions" name="infractions">
+                <div id="selectedVotingPower"></div>
+                <button type="button" onclick="addValidator()" class="btn">Run Simulation</button>
+                <button type="button" onclick="resetForm()" class="btn">Reset</button>
+            </form>
+
+            <h3>Simulation Results</h3>
+            <table class="simulation-table">
+                <thead>
+                    <tr>
+                        <th>Validator</th>
+                        <th>Epoch</th>
+                        <th>Voting Power</th>
+                        <th>Infractions</th>
+                        <th>CSR (%)</th>
+                        <th>Slashed NAM</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Placeholder for simulation results -->
+                </tbody>
+            </table>
+        </section>
+
+        <section class="description">
+            <h2>Why Diversify Your Stake?</h2>
+            <p>It’s important to diversify your stake across multiple validators. By doing so, you can minimize risk and help support a decentralized network. Consider staking with validators like <a href="https://explorer75.org/namada/validators/tnam1qyplu8gruqmmvwp7x7kd92m6x4xpyce265fa05r6" target="_blank">Grand Valley</a>.</p>
+        </section>
+
+        <section class="links">
+            <h2>Links</h2>
+            <div class="logo-container">
+                <a href="https://x.com/bacvalley" target="_blank">
+                    <img src="https://i.pinimg.com/736x/99/65/5e/99655e9fe24eb0a7ea38de683cedb735.jpg" alt="Grand Valley's X">
+                </a>
+                <a href="https://valley-of-namadillo.grandvalleys.com/" target="_blank">
+                    <img src="https://i.ibb.co/TKQMrR9/RT76-R3-J-3.png" alt="Valley of Namadillo">
+                </a>
+                <a href="https://github.com/hubofvalley" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Grand Valley's GitHub">
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Let's Buidl Namada Together, Let's Shiedl Together. - Grand Valley</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
