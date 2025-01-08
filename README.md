@@ -49,9 +49,7 @@ This guide provides instructions to host the website locally on **Windows** and 
 
 #### Steps:
 
-1. **Download or Clone the Project**
-
-   - Download the ZIP file from the GitHub repository, or use the following command:
+1. **Clone the Repo**
      ```bash
      git clone https://github.com/hubofvalley/Namada-Cubic-Slashing-Rate-Simulation-Tool.git
      cd Namada-Cubic-Slashing-Rate-Simulation-Tool
