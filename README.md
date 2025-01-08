@@ -19,7 +19,7 @@ This tool helps stakers understand Namada's unique Cubic Slashing system, which 
 4. Supporting smaller validators like Grand Valley promotes stability for Namada ([tnam1qyplu8gruqmmvwp7x7kd92m6x4xpyce265fa05r6](https://explorer75.org/namada/validators/tnam1qyplu8gruqmmvwp7x7kd92m6x4xpyce265fa05r6)).
 5. Don’t put all your marbles in one jar – spread them for safety!
 
-Let's Build Namada Together, Let's Shield Together. - Grand Valley
+Let's Buidl Namada Together, Let's Shiedl Together. - Grand Valley
 
 ---
 
@@ -88,6 +88,18 @@ This guide provides instructions to host the website locally on **Windows** and 
      sudo apt install -y git
      ```
 
+3. **xdg-utils** installed:
+   - Install xdg-utils:
+     ```bash
+     sudo apt install -y xdg-utils
+     ```
+
+4. **live-server** installed:
+   - Install live-server:
+     ```bash
+     npm install live-server --save-dev
+     ```
+
 #### Steps:
 1. **Clone the Project**
    - Open the terminal and run:
@@ -102,29 +114,58 @@ This guide provides instructions to host the website locally on **Windows** and 
      npm install
      ```
 
-3. **Start the Local Server**
-   - Run the following command to start the local server:
+3. **Grant permission**
      ```bash
-     npm start -- --port=<your-port-number>
+     chmod +x /root/Namada-Cubic-Slashing-Rate-Simulation-Tool/node_modules/opn/xdg-open
+     chmod +x ./node_modules/.bin/live-server
      ```
-   - Replace `<your-port-number>` with your desired port (e.g., `3000`, `8080`).
 
-4. **Optional: Run the Server Permanently**
-   - If you want the server to run continuously on an Ubuntu server:
-     - Install **PM2** (a process manager for Node.js):
-       ```bash
-       sudo npm install -g pm2
-       ```
-     - Start the server with PM2:
-       ```bash
-       pm2 start npm -- start -- --port=<your-port-number>
-       pm2 save
-       pm2 startup
-       ```
+4. **Set Up the Website as a Service**
+   - Create a systemd service file:
+     ```bash
+     sudo nano /etc/systemd/system/csr-tool.service
+     ```
+   - Add the following content, replacing `<your-port-number>` with your desired port:
+     ```ini
+     [Unit]
+     Description=Cubic Slashing Rate Tool Service
+     After=network.target
 
-5. **Access the Website**
+     [Service]
+     Type=simple
+     WorkingDirectory=/path/to/Namada-Cubic-Slashing-Rate-Simulation-Tool
+     ExecStart=/usr/bin/npm start -- --port=<your-port-number>
+     Restart=on-failure
+     User=www-data
+
+     [Install]
+     WantedBy=multi-user.target
+     ```
+   - Save and exit (`Ctrl+O`, `Enter`, `Ctrl+X`).
+
+5. **Start and Enable the Service**
+   - Reload systemd to recognize the new service:
+     ```bash
+     sudo systemctl daemon-reload
+     ```
+   - Start the service:
+     ```bash
+     sudo systemctl start csr-tool
+     ```
+   - Enable the service to start on boot:
+     ```bash
+     sudo systemctl enable csr-tool
+     ```
+
+6. **Access the Website**
    - If hosting locally, visit `http://localhost:<your-port-number>` in your browser.
    - If hosting on a cloud server, use the server's **public IP address** with the specified port.
+
+7. **Check Service Status**
+   - Ensure the service is running:
+     ```bash
+     sudo systemctl status csr-tool
+     ```
 
 ---
 
