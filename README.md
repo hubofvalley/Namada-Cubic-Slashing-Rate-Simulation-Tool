@@ -19,7 +19,7 @@ This tool helps stakers understand Namada's unique Cubic Slashing system, which 
 4. Supporting smaller validators like Grand Valley promotes stability for Namada ([tnam1qyplu8gruqmmvwp7x7kd92m6x4xpyce265fa05r6](https://explorer75.org/namada/validators/tnam1qyplu8gruqmmvwp7x7kd92m6x4xpyce265fa05r6)).
 5. Don’t put all your marbles in one jar – spread them for safety!
 
-Let's Buidl Namada Together, Let's Shiedl Together. - Grand Valley
+Let's Build Namada Together, Let's Shield Together. - Grand Valley
 
 ---
 
@@ -60,12 +60,12 @@ This guide provides instructions to host the website locally on **Windows** and 
 3. **Start the Local Server**
    - After installation, start the server using:
      ```bash
-     npm start
+     npm start -- --port=<your-port-number>
      ```
-   - The local server will run at `http://localhost:3000` (or a different port if specified in `package.json`).
+   - Replace `<your-port-number>` with your desired port (e.g., `3000`, `8080`).
 
 4. **Access the Website**
-   - Open your browser and visit `http://localhost:3000`.
+   - Open your browser and visit `http://localhost:<your-port-number>`.
 
 5. **Optional: Deploy on a Hosting Platform**
    - You can upload the project files to hosting services like Netlify, Vercel, or GitHub Pages (see additional instructions below).
@@ -105,9 +105,9 @@ This guide provides instructions to host the website locally on **Windows** and 
 3. **Start the Local Server**
    - Run the following command to start the local server:
      ```bash
-     npm start
+     npm start -- --port=<your-port-number>
      ```
-   - The server will run at `http://localhost:3000`.
+   - Replace `<your-port-number>` with your desired port (e.g., `3000`, `8080`).
 
 4. **Optional: Run the Server Permanently**
    - If you want the server to run continuously on an Ubuntu server:
@@ -117,20 +117,20 @@ This guide provides instructions to host the website locally on **Windows** and 
        ```
      - Start the server with PM2:
        ```bash
-       pm2 start npm -- start
+       pm2 start npm -- start -- --port=<your-port-number>
        pm2 save
        pm2 startup
        ```
 
 5. **Access the Website**
-   - If hosting locally, visit `http://localhost:3000` in your browser.
-   - If hosting on a cloud server, use the server's **public IP address**.
+   - If hosting locally, visit `http://localhost:<your-port-number>` in your browser.
+   - If hosting on a cloud server, use the server's **public IP address** with the specified port.
 
 ---
 
 ### Additional Notes:
 - **Windows**: If `npm` or `node` commands are not recognized, ensure the Node.js installation path is added to your system's `PATH` environment variable.
-- **Ubuntu**: If hosting on a server, make sure the firewall allows access to port 3000 (e.g., configure `ufw` if necessary).
+- **Ubuntu**: If hosting on a server, make sure the firewall allows access to the specified port (e.g., configure `ufw` if necessary).
 
 ---
 
