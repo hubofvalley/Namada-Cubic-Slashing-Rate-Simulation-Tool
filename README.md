@@ -180,7 +180,7 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/$USER/Namada-Cubic-Slashing-Rate-Simulation-Tool
+WorkingDirectory=$USER/Namada-Cubic-Slashing-Rate-Simulation-Tool
 ExecStart=/usr/bin/npm start -- --port=3000
 Restart=on-failure
 User=$USER
