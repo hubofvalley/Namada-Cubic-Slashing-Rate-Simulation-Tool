@@ -125,6 +125,16 @@
         #scrollButton:hover {
             background-color: #e77d39;
         }
+        #realTimeEpochBox {
+            margin: 20px 0 0 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            color: #333;
+            font-weight: bold;
+            border-radius: 5px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -132,6 +142,7 @@
         <div class="logo-header">
             <img src="https://i.ibb.co.com/kgD90np/GRAND-VALLEY-fix.png" alt="Grand Valley Logo">
             <h1>Cubic Slashing Rate Simulation Tool by Grand Valley</h1>
+            <div id="realTimeEpochBox">Real-Time Epoch: <span id="realTimeEpochValue"></span></div>
         </div>
     </header>
     <div class="content">
@@ -177,7 +188,7 @@
         <section id="simulationTool">
             <h2>CSR Simulation Tool</h2>
             <p>Use this tool to simulate CSR based on validator infractions. You can select multiple validators and input infraction details to calculate the potential CSR for each validator. The simulation tool is not limited to only one validator; you can input as many validators as you want.</p>
-            <p><strong> How to Use the Simulation Tool:</strong>
+            <p><strong>How to Use the Simulation Tool:</strong>
                 <ol>
                     <li><strong>Select Validator</strong>: Choose a validator from the dropdown menu.</li>
                     <li><strong>Input Epoch</strong>: Enter the epoch in which the infractions occurred.</li>
@@ -186,6 +197,14 @@
                     <li><strong>View Results</strong>: The simulation results will be displayed in the table below, showing the CSR percentage and the amount of slashed NAM for each validator.</li>
                 </ol>
             </p>
+            <p><strong>Note:</strong> This tool can only simulate a slashing scenario within a real-time epoch range (epoch -1, epoch 0, epoch +1). However, the slashing mechanism in this simulation is accurate. The only caveat is that the exact values of voting power in epoch -1 and epoch +1 are assumed to be the same as those in epoch 0, because currently the tool can only query VP (Voting Power) and TVP (Total Voting Power) data in real-time epoch.</p>
+            <p><em>Explanation of Epochs:</em>
+            <ul>
+                <li><strong>Epoch -1:</strong> This refers to the epoch immediately before the current (real-time) epoch. It's used to simulate what would have happened if an action occurred just before the current time frame.</li>
+                <li><strong>Epoch 0:</strong> This is the current epoch, or the real-time epoch where we gather all immediate data from.</li>
+                <li><strong>Epoch +1:</strong> This represents the epoch immediately following the current one, used for forward-looking simulation scenarios to see potential future impacts based on current data.</li>
+            </ul>
+            </p>
             <form>
                 <!-- Input form for simulation (validator selection, infraction input, etc.) -->
                 <label for="validatorSelect">Select Validator:</label>
@@ -193,7 +212,9 @@
                     <!-- Placeholder for validators -->
                 </select>
                 <label for="epoch">Epoch:</label>
-                <input type="number" id="epoch" name="epoch">
+                <select id="epoch" name="epoch">
+                    <!-- Options will be populated dynamically based on real-time epoch -->
+                </select>
                 <label for="infractions">Infractions:</label>
                 <input type="number" id="infractions" name="infractions">
                 <div id="selectedVotingPower"></div>
@@ -222,7 +243,7 @@
 
         <section class="description">
             <h2>Why Diversify Your Stake?</h2>
-            <p>It’s important to diversify your stake across multiple validators. By doing so, you can minimize risk and help support a decentralized network. Consider staking with validators like <a href="https://explorer75.org/namada/validators/tnam1qyplu8gruqmmvwp7x7kd92m6x4xpyce265fa05r6" target="_blank">Grand Valley</a>.</p>
+            <p>It’s important to diversify your stake across multiple validators. By doing so, you can minimize risk and help support a decentralized network. Consider staking with validators like <a href="https://explorer75.org/namada/validators/tnam1qyplu8gruqmmvwp7x7kd92m6x4xpyce265fa05r6" target="_blank">Grand Valley</a>, a legitimate validator with a proven track record.</p>
         </section>
 
         <section class="links">

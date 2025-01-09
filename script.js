@@ -4,10 +4,12 @@ let availableValidators = [];
 let currentPage = 1;
 const itemsPerPage = 20;
 let scrolledToBottom = false;
+let realTimeEpoch = 0;
 
 // Fetch validators and populate data on load
 fetchAvailableValidators();
 fetchTotalVotingPower();
+fetchRealTimeEpoch();
 
 function fetchAvailableValidators() {
     fetch('https://indexer-mainnet-namada.grandvalleys.com/api/v1/pos/validator/all?state=consensus')
@@ -30,6 +32,19 @@ function fetchTotalVotingPower() {
         .then(response => response.json())
         .then(data => {
             totalVotingPower = parseInt(data.totalVotingPower); // Ensure totalVotingPower is an integer
+        })
+        .catch(console.error);
+}
+
+function fetchRealTimeEpoch() {
+    fetch('https://indexer-mainnet-namada.grandvalleys.com/api/v1/chain/epoch/latest')
+        .then(response => response.json())
+        .then(data => {
+            realTimeEpoch = parseInt(data.epoch); // Ensure realTimeEpoch is an integer
+            updateEpochDropdown();
+            updateValidatorsTable();
+            updateResultsTable();
+            document.getElementById("realTimeEpochValue").textContent = realTimeEpoch; // Update the real-time epoch value in the header
         })
         .catch(console.error);
 }
@@ -62,6 +77,11 @@ function addValidator() {
         return;
     }
 
+    if (epoch < realTimeEpoch - 1 || epoch > realTimeEpoch + 1) {
+        alert("Please enter an epoch within the range of the real-time epoch.");
+        return;
+    }
+
     if (!document.selectedValidatorVotingPower) {
         alert("Invalid voting power for the selected validator.");
         return;
@@ -86,6 +106,20 @@ function removeValidator(name) {
         updateValidatorsTable();
         updateResultsTable();
     }
+}
+
+function updateEpochDropdown() {
+    const epochSelect = document.getElementById("epoch");
+    epochSelect.innerHTML = ''; // Clear existing options
+
+    // Add options for epoch-1, epoch, and epoch+1
+    const epochOptions = [realTimeEpoch - 1, realTimeEpoch, realTimeEpoch + 1];
+    epochOptions.forEach(epoch => {
+        const option = document.createElement("option");
+        option.value = epoch;
+        option.textContent = `Epoch ${epoch}`;
+        epochSelect.appendChild(option);
+    });
 }
 
 function updateValidatorsTable() {
@@ -206,4 +240,34 @@ window.addEventListener("scroll", function() {
         scrolledToBottom = true;
         document.getElementById("descriptionSection").style.display = "block";
     }
+});
+
+function updateRealTimeEpochInTable() {
+    const tableBody = document.querySelector(".validator-table tbody");
+    const rows = tableBody.getElementsByTagName("tr");
+
+    for (let row of rows) {
+        const cells = row.getElementsByTagName("td");
+        cells[cells.length - 1].textContent = realTimeEpoch; // Update the last cell with realTimeEpoch
+    }
+
+    const resultsTableBody = document.querySelector(".simulation-table tbody");
+    const resultsRows = resultsTableBody.getElementsByTagName("tr");
+
+    for (let row of resultsRows) {
+        const cells = row.getElementsByTagName("td");
+        cells[1].textContent = realTimeEpoch; // Update the second cell with realTimeEpoch
+    }
+}
+
+// Add a box to display the real-time epoch value
+document.addEventListener("DOMContentLoaded", function() {
+
+    // Insert the box above the validator list table
+    const validatorListTable = document.querySelector(".validator-table");
+    validatorListTable.parentNode.insertBefore(realTimeEpochBox, validatorListTable);
+
+    // Insert the box in the CSR simulation tool section
+    const simulationToolSection = document.getElementById("simulationTool");
+    simulationToolSection.insertBefore(cloneNode(true), simulationToolSection.firstChild);
 });
