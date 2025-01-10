@@ -134,10 +134,10 @@ function updateValidatorsTable() {
         const fvp = (validator.votingPower / totalVotingPower) * 100; // Convert to percentage
         const fractionalVotingPower = validator.votingPower / totalVotingPower;
         const cubicSlashRate = 9 * (fractionalVotingPower ** 2);
-        const independentCSR = Math.max(cubicSlashRate, 0.01);
+        const independentCSR = Math.max(cubicSlashRate, 0.001);
 
         // Ensure the Independent CSR is at least 1% and not more than 100%
-        const finalIndependentCSR = Math.min(Math.max(independentCSR * 100, 1), 100).toFixed(2);
+        const finalIndependentCSR = Math.min(Math.max(independentCSR * 100, 0.1), 100).toFixed(2);
 
         tableBody.innerHTML += `<tr>
             <td>${validator.name}</td>
@@ -201,7 +201,7 @@ function calculateCSR(validators) {
 
         // Calculate CSR
         const csr = 9 * (iwwvftvp ** 2) * 100;
-        const finalCSR = Math.min(Math.max(csr, 1), 100).toFixed(2); // Ensure CSR is at least 1% and not more than 100%
+        const finalCSR = Math.min(Math.max(csr, 0.1), 100).toFixed(2); // Ensure CSR is at least 1% and not more than 100%
         const slashedNAM = (finalCSR / 100) * votingPower;
 
         csrResults[name] = finalCSR;
